@@ -11,7 +11,7 @@ const TasksContainer = () => {
 
   
 
-    const [editedTask, setEditedTask] = useState({
+    const [editedTask, setEditedTask] = useState<any>({
         title: selectedTask? selectedTask.title : "",
         description: selectedTask? selectedTask.description : "",
         completed: selectedTask? selectedTask.completed : "",
