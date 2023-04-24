@@ -12,18 +12,18 @@ const TasksContainer = () => {
   
 
     const [editedTask, setEditedTask] = useState<any>({
-        title: selectedTask? selectedTask.title : "",
-        description: selectedTask? selectedTask.description : "",
-        completed: selectedTask? selectedTask.completed : "",
+        title: selectedTask? selectedTask?.title : "",
+        description: selectedTask? selectedTask?.description : "",
+        completed: selectedTask? selectedTask?.completed : "",
     }
     );
 
 
     useEffect(() => {
         setEditedTask({
-          title: selectedTask ? selectedTask.title : "",
-          description: selectedTask ? selectedTask.description : "",
-          completed: selectedTask ? selectedTask.completed : false,
+          title: selectedTask ? selectedTask?.title : "",
+          description: selectedTask ? selectedTask?.description : "",
+          completed: selectedTask ? selectedTask?.completed : "",
         });
       }, [selectedTask]);
 
