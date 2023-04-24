@@ -5,17 +5,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteTask, addTask, editTask } from '../../GlobalRedux/features/task/taskSlice';
 
 
-
 const TasksContainer = () => {
     const [edit, setEdit] = useState(false);
-    const [selectedTask, setSelectedTask] = useState()
+    const [selectedTask, setSelectedTask] = useState<any>()
+
+  
 
     const [editedTask, setEditedTask] = useState({
-        title: selectedTask ? selectedTask.title : "",
-        description: selectedTask ? selectedTask.description : "",
-        completed: selectedTask ? selectedTask.completed : "",
+        title: selectedTask? selectedTask.title : "",
+        description: selectedTask? selectedTask.description : "",
+        completed: selectedTask? selectedTask.completed : "",
     }
-     
     );
 
 
