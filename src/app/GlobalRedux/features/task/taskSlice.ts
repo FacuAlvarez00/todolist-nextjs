@@ -2,6 +2,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState} from '../../store'
+import { v4 as uuidv4 } from 'uuid';
+
+const generateId = (): string => {
+  return uuidv4();
+};
 
 interface TaskState {
     value: any,
@@ -10,7 +15,7 @@ interface TaskState {
 const initialState: TaskState = {
     value: [
       {
-        id: "1",
+        id: generateId(),
         title: "Task 1",
         completed: false,
         description: "This is a example task",
@@ -23,16 +28,25 @@ const initialState: TaskState = {
     initialState,
     reducers: {
       addTask: (state, action: PayloadAction<any>) => {
-        state.value.push(action.payload)
+        const newTask = { ...action.payload, id: generateId() };
+        state.value.push(newTask)
+      },
+      editTask: (state, action: PayloadAction<any>) => {
+        const { id, title, description } = action.payload;
+        const task = state.value.find((task: any) => task.id === id);
+        if (task) {
+          task.title = title;
+          task.description = description;
+        }
       },
       deleteTask: (state, action: PayloadAction<any>) => {
         state.value = state.value.filter((task: any) => task.id !== action.payload)
       }
-      
+
     },
   })
   
-  export const { addTask, deleteTask } = taskSlice.actions
+  export const { addTask, deleteTask, editTask } = taskSlice.actions
   
 
   export const selectCount = (state: RootState) => state.tasks.value
