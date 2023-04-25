@@ -32,11 +32,12 @@ const initialState: TaskState = {
         state.value.push(newTask)
       },
       editTask: (state, action: PayloadAction<any>) => {
-        const { id, title, description } = action.payload;
+        const { id, title, description, completed } = action.payload;
         const task = state.value.find((task: any) => task.id === id);
         if (task) {
           task.title = title;
           task.description = description;
+          task.completed = completed;
         }
       },
       deleteTask: (state, action: PayloadAction<any>) => {

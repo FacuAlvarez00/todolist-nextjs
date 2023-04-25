@@ -34,15 +34,30 @@ const TaskForm = () => {
     });
   };
 
+  const handleCompletedChange = () => {
+    setTask({
+      ...task,
+      completed: !task.completed,
+    });
+  };
+
 
 
 
   return (
-    <div>
+    <div className='d-flex justify-content-center'>
       <form onSubmit={handleSubmit}>
-        <input onChange={handleChange} name="title" type="text" placeholder="title" required />
-        <textarea onChange={handleChange} name="description" placeholder='description' required />
-        <input onChange={handleChange} name="completed" type="checkbox" placeholder="completed" /> 
+        <div className='d-flex flex-column input-group input-group-lg'>
+          <input style={{ width: "400px", height: "50px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="title" required />
+          <textarea style={{ width: "400px", height: "120px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='description' required />
+          <label className='mb-2'>
+            Completed:
+            <input type="checkbox" checked={task.completed} onChange={handleCompletedChange} />
+          </label>
+
+        </div>
+
+
         <button>Save task</button>
 
       </form>

@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteTask, addTask, editTask } from '../../GlobalRedux/features/task/taskSlice';
+import {AiFillCheckCircle} from "react-icons/ai"
+import {RxCrossCircled} from "react-icons/rx"
 
 
 const TasksContainer = () => {
@@ -12,18 +14,18 @@ const TasksContainer = () => {
   
 
     const [editedTask, setEditedTask] = useState<any>({
-        title: selectedTask? selectedTask?.title : "",
-        description: selectedTask? selectedTask?.description : "",
-        completed: selectedTask? selectedTask?.completed : "",
+        title: selectedTask? selectedTask.title : "",
+        description: selectedTask? selectedTask.description : "",
+        completed: selectedTask? selectedTask.completed : "",
     }
     );
 
 
     useEffect(() => {
         setEditedTask({
-          title: selectedTask ? selectedTask?.title : "",
-          description: selectedTask ? selectedTask?.description : "",
-          completed: selectedTask ? selectedTask?.completed : "",
+          title: selectedTask ? selectedTask.title : "",
+          description: selectedTask ? selectedTask.description : "",
+          completed: selectedTask ? selectedTask.completed : "",
         });
       }, [selectedTask]);
 
@@ -54,37 +56,52 @@ const TasksContainer = () => {
       }
 
       const handleChange = (e: any) => {
+        const { name, value, type, checked } = e.target;
         setEditedTask({
           ...editedTask,
-          [e.target.name]: e.target.value,
+          [name]: type === "checkbox" ? checked : value,
         });
       };
-    
 
-
+      useEffect (() => {
+        console.log(tasks)
+        }, [handleSubmit])
 
 
     return (
+        <section className='d-flex justify-content-center'>
+
+     
 
         <div>
-            {tasks.value.map((task: any) => (
-                <div key={task.id}>
-                    <h1>{task.title}</h1>
+            <div style={{minWidth: "700px"}} className='tasks__holder border border-light-subtle
+            mb-4'>
+
+            
+            {
+            tasks.value.map((task: any) => (
+                <div className='d-flex mb-5 justify-content-between' key={task.id}>
+                    <h4>{task.title}</h4>
                     <p>{task.description}</p>
-                    {task.completed ? <h3>Done</h3> : <h3>Incompleted</h3>}
+                    {task.completed ? <AiFillCheckCircle style={{ width: "30px", height: "30px"}}/> : <RxCrossCircled style={{ width: "30px", height: "30px"}}/>}
                     <button onClick={() => handleTaskDelete(task.id)}>Delete</button>
                     <button onClick={() => handleTaskEdit(task.id)}>Edit</button>
                 </div>
             ))}
+            </div>
 
             {
                 edit && selectedTask? 
                 <>
-                    <p>Editing</p>
                     <h1>Editing task...</h1>
                     <form onSubmit={handleSubmit}>
                         <input onChange={handleChange} name="title" type="text" defaultValue={selectedTask.title} required />
                         <textarea onChange={handleChange} name="description" defaultValue={selectedTask.description} required />
+                        <label>
+                        Completed:
+                        <input onChange={handleChange} type="checkbox" name="completed" defaultChecked={selectedTask.completed} />
+                        </label>
+                        
                         <button>Confirm editing</button>
                     </form>
                 </>
@@ -93,7 +110,7 @@ const TasksContainer = () => {
             }
           
         </div>
-
+    </section>
     )
 }
 
