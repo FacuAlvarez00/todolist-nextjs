@@ -18,7 +18,7 @@ const initialState: TaskState = {
         id: generateId(),
         title: "Task 1",
         completed: false,
-        description: "This is a example task",
+        description: "This is an example task",
       },
     ],
   }

@@ -11,9 +11,9 @@ import TaskForm from './TaskForm';
 
 const TasksContainer = () => {
     const [edit, setEdit] = useState(false);
-
     const [selectedTask, setSelectedTask] = useState<any>()
     const [displayedTask, setDisplayedTask] = useState<any>()
+    const [displayedTaskEdit, setDisplayedTaskEdit] = useState<boolean>(false)
     const [editedTask, setEditedTask] = useState<any>({
         title: selectedTask ? selectedTask.title : "",
         description: selectedTask ? selectedTask.description : "",
@@ -46,8 +46,11 @@ const TasksContainer = () => {
         setEdit(!edit)
         const selectedTask = tasks.value.find((task: any) => task.id === id);
         setSelectedTask(selectedTask)
-
     };
+    const displayedTaskEditHandler = () => {
+        setDisplayedTaskEdit(!displayedTaskEdit)
+
+    }
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -97,7 +100,7 @@ const TasksContainer = () => {
 
 
                                 <div>
-                                    {displayedTask === task.id ? <p className='fs-5'>{task.description}</p> : null}
+                                    {displayedTask === task.id ? <p style={{margin: "0"}} className='fs-5'>{task.description}</p> : null}
                                 </div>
                             </div>
 
@@ -109,7 +112,7 @@ const TasksContainer = () => {
 
                                 </div>
 
-                                <div>
+                                <div className='d-flex gap-2'>
                                     <button className='btn btn-dark' onClick={() => handleTaskEdit(task.id)}>Edit</button>
                                     <button className='btn btn-danger' onClick={() => handleTaskDelete(task.id)}>Delete</button>
 
@@ -129,20 +132,40 @@ const TasksContainer = () => {
                         <>
                             <h1>Editing task...</h1>
                             <form onSubmit={handleSubmit}>
-                                <input maxLength={40} onChange={handleChange} name="title" type="text" defaultValue={selectedTask.title} required />
-                                <textarea maxLength={120} onChange={handleChange} name="description" defaultValue={selectedTask.description} required />
-                                <label>
-                                    Completed:
-                                    <input onChange={handleChange} type="checkbox" name="completed" defaultChecked={selectedTask.completed} />
-                                </label>
+                                <div className='d-flex flex-column input-group input-group-lg'>
+                                    <input maxLength={40} onChange={handleChange} name="title" type="text" defaultValue={selectedTask.title} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" style={{ height: "80px" }} />
+                                    <textarea maxLength={120} onChange={handleChange} name="description" defaultValue={selectedTask.description} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" style={{ height: "120px" }} />
 
-                                <button className='btn btn-success'>Confirm editing</button>
+                                    <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+                                        <input onChange={handleChange} type="checkbox" className="btn-check" id="btncheck1" name='completed' defaultChecked={selectedTask.completed} />
+
+                                        <label className={selectedTask.completed? "btn btn-outline-primary mb-2" : "btn btn-outline-danger mb-2" } htmlFor='btncheck1' >
+
+                                            {
+                                                selectedTask.completed ? "Completed" : "Not Completed"
+                                            }
+                                        </label>
+                                    </div>
+
+                                 {/*    <label className='fs-5'>
+                                        Completed:
+                                        <input onChange={handleChange} type="checkbox" name="completed" defaultChecked={selectedTask.completed} />
+                                    </label> */}
+
+                                </div>
+                                <div className='d-flex gap-2'>
+                                    <button className='btn btn-success'>Confirm</button>
+                                    <button style={{ color: "black" }} onClick={handleTaskEdit} className='btn btn-warning fw-semibold'>Cancel</button>
+                                </div>
+
+
                             </form>
                         </>
                         :
                         null
                 }
-                <TaskForm edit={edit}/>
+                <TaskForm edit={edit} />
             </div>
         </section>
     )

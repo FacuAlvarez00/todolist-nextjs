@@ -58,7 +58,7 @@ const TaskForm: React.FC<props>= ({edit}) => {
           <input maxLength={40} style={{ width: "400px", height: "50px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="title" required />
           <textarea maxLength={120} style={{ width: "400px", height: "120px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='description' required />
           <label className='mb-2'>
-            Completed:
+           <span className='fs-5'>Completed:</span> 
             <input type="checkbox" checked={task.completed} onChange={handleCompletedChange} />
           </label>
         
