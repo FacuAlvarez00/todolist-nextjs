@@ -5,11 +5,16 @@ import { addTask } from '../../GlobalRedux/features/task/taskSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
+type props = {
+  edit: any
+}
 
-const TaskForm = () => {
+const TaskForm: React.FC<props>= ({edit}) => {
 
   const tasks = useSelector((state: any) => state.tasks);
   const dispatch = useDispatch();
+
+  
 
 
   const [task, setTask] = useState({
@@ -45,24 +50,32 @@ const TaskForm = () => {
 
 
   return (
-    <div className='d-flex justify-content-center'>
+  <section>
+    {
+      edit ? null :  <div className='d-flex justify-content-center'>
       <form onSubmit={handleSubmit}>
         <div className='d-flex flex-column input-group input-group-lg'>
-          <input style={{ width: "400px", height: "50px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="title" required />
-          <textarea style={{ width: "400px", height: "120px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='description' required />
+          <input maxLength={40} style={{ width: "400px", height: "50px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="title" required />
+          <textarea maxLength={120} style={{ width: "400px", height: "120px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='description' required />
           <label className='mb-2'>
             Completed:
             <input type="checkbox" checked={task.completed} onChange={handleCompletedChange} />
           </label>
+        
 
         </div>
 
 
-        <button>Save task</button>
+        <button className='btn btn-success'>Save task</button>
 
       </form>
 
     </div>
+    }
+       
+
+  </section>
+
   )
 }
 

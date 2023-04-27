@@ -8,7 +8,7 @@ export default function Home() {
     <>
     <h1 className="d-flex justify-content-center mb-5">Task manager!</h1>
     <TasksContainer/>
-    <TaskForm/>
+   {/*  <TaskForm/> */}
      
     </>
   )
