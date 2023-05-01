@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addTask } from '../../GlobalRedux/features/task/taskSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import {createOrder} from "../../firebase"
+
 
 
 type props = {
@@ -12,7 +14,9 @@ type props = {
 const TaskForm: React.FC<props>= ({edit}) => {
 
   const tasks = useSelector((state: any) => state.tasks);
+  const user = useSelector((state: any) => state.user.user);
   const dispatch = useDispatch();
+
 
   
 
@@ -46,7 +50,19 @@ const TaskForm: React.FC<props>= ({edit}) => {
     });
   };
 
+  function sendInfo() {
+    const order = {
+        userinfo: user?.uid,
+        tasks: tasks,
+        date: new Date(),
+      };
+    createOrder(order)
+    console.log("data")
+}
 
+
+
+ 
 
 
   return (
@@ -66,7 +82,7 @@ const TaskForm: React.FC<props>= ({edit}) => {
         </div>
 
 
-        <button className='btn btn-success'>Save task</button>
+        <button onClick={sendInfo} className='btn btn-success'>Save task</button>
 
       </form>
 
