@@ -62,20 +62,23 @@ const TaskForm: React.FC<props>= ({edit}) => {
   function sendInfo() {
     const order = {
         userinfo: user?.uid,
-        username: user.displayName,
+        username: user?.displayName,
         tasks: tasks,
         date: new Date(),
       };
     createOrder(order)
     }
 
+
     useEffect(() => {
-      const timer = setTimeout(() => {
-        sendInfo();
-      }, 500); 
-      return () => clearTimeout(timer);
-    }, [handleSubmit, sendInfo]);
-    
+      if (user) {
+        const timer = setTimeout(() => {
+          sendInfo();
+        }, 500);
+        
+        return () => clearTimeout(timer);
+      }
+    }, [handleSubmit, sendInfo, user]);
 
   return (
   <section>

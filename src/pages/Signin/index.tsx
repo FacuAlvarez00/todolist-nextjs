@@ -47,12 +47,12 @@ export default function SignIn() {
    
 
 
-    console.log(user)
+    
   return (
     <div>
         <h2>Account panel</h2>
         <Link href="/">
-        <button>Home</button>
+        Return home
         </Link>
         
         {user ? (

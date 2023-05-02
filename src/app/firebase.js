@@ -18,7 +18,10 @@ export const auth = getAuth(app)
 
 
 export async function createOrder(order) {
-  const orderRef = doc(db, "order", + order.username  + "-"  + order.userinfo);
+
+  const orderRef = doc(db, "order", order.username + " - " + order.userinfo);
   let respuesta = await setDoc(orderRef, order);
   return respuesta
+
+  
 }

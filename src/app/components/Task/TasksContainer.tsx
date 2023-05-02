@@ -11,7 +11,7 @@ import TaskForm from './TaskForm';
 
 const TasksContainer = () => {
    
-    const user = useSelector((state: any) => state.user.user);
+    
 
     const [edit, setEdit] = useState(false);
     const [selectedTask, setSelectedTask] = useState<any>()
