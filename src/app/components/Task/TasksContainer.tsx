@@ -10,6 +10,9 @@ import TaskForm from './TaskForm';
 
 
 const TasksContainer = () => {
+   
+    const user = useSelector((state: any) => state.user.user);
+
     const [edit, setEdit] = useState(false);
     const [selectedTask, setSelectedTask] = useState<any>()
     const [displayedTask, setDisplayedTask] = useState<any>()
@@ -32,7 +35,8 @@ const TasksContainer = () => {
 
 
 
-
+  
+   
 
 
     const tasks = useSelector((state: any) => state.tasks);
@@ -76,10 +80,10 @@ const TasksContainer = () => {
         });
     };
 
-    useEffect(() => {
+   /*  useEffect(() => {
         console.log(tasks)
     }, [handleSubmit])
-
+ */
 
     return (
         <section className='d-flex justify-content-center'>

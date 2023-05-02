@@ -2,8 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { addTask } from '../../GlobalRedux/features/task/taskSlice';
+import { setUser } from '../../GlobalRedux/features/account/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import {createOrder} from "../../firebase"
+import { onAuthStateChanged } from "firebase/auth";
+import {auth} from "../../../app/firebase"
+
 
 
 
@@ -14,12 +18,20 @@ type props = {
 const TaskForm: React.FC<props>= ({edit}) => {
 
   const tasks = useSelector((state: any) => state.tasks);
+
   const user = useSelector((state: any) => state.user.user);
+
+
   const dispatch = useDispatch();
 
-
-  
-
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser: any) => {
+      dispatch(setUser(currentUser))
+    })
+    return () => {
+      unsubscribe()
+    }
+  }, [dispatch])
 
   const [task, setTask] = useState({
     title: "",
@@ -27,14 +39,11 @@ const TaskForm: React.FC<props>= ({edit}) => {
     completed: false,
   });
 
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(addTask(task));
-    console.log(tasks)
+    
   }
-
-
 
   const handleChange = (e: any) => {
     setTask({
@@ -53,17 +62,20 @@ const TaskForm: React.FC<props>= ({edit}) => {
   function sendInfo() {
     const order = {
         userinfo: user?.uid,
+        username: user.displayName,
         tasks: tasks,
         date: new Date(),
       };
     createOrder(order)
-    console.log("data")
-}
+    }
 
-
-
- 
-
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        sendInfo();
+      }, 500); 
+      return () => clearTimeout(timer);
+    }, [handleSubmit, sendInfo]);
+    
 
   return (
   <section>
@@ -82,7 +94,7 @@ const TaskForm: React.FC<props>= ({edit}) => {
         </div>
 
 
-        <button onClick={sendInfo} className='btn btn-success'>Save task</button>
+        <button className='btn btn-success'>Save task</button> 
 
       </form>
 

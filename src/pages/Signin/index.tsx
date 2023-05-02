@@ -1,19 +1,19 @@
 import React from 'react'
 import { googleSignIn, logOut } from '../../app/utils/account'
 import {auth} from "../../app/firebase"
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../app/GlobalRedux/features/account/accountSlice';
 import Link from "next/link"
 
-/* import { useNavigate } from 'react-router-dom' */
+
 
 
 export default function SignIn() {
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user.user);
-   /*  const navigate = useNavigate() */
+
 
     const handleSignIn = async () => {
         try {
@@ -44,15 +44,9 @@ export default function SignIn() {
       };
     }, [dispatch]);
 
+   
 
- 
 
-  /*   useEffect ( () => {
-        if (user != null){
-            navigate("/")
-        }
-    }, [user])
- */
     console.log(user)
   return (
     <div>
