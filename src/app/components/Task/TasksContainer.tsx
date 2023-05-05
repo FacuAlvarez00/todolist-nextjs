@@ -2,17 +2,20 @@
 
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteTask, addTask, editTask } from '../../GlobalRedux/features/task/taskSlice';
+import { deleteTask, addTask, editTask, setTasks } from '../../GlobalRedux/features/task/taskSlice';
 import { AiFillCheckCircle } from "react-icons/ai"
 import { RxCrossCircled } from "react-icons/rx"
 import { RiArrowDropDownLine } from "react-icons/ri"
 import TaskForm from './TaskForm';
+import { getOrderTask } from "../../firebase"
 
 
 const TasksContainer = () => {
    
-    
+    const user = useSelector((state: any) => state.user.user);
 
+
+    const [data, setData] = useState<any>([])
     const [edit, setEdit] = useState(false);
     const [selectedTask, setSelectedTask] = useState<any>()
     const [displayedTask, setDisplayedTask] = useState<any>()
@@ -33,10 +36,6 @@ const TasksContainer = () => {
         });
     }, [selectedTask]);
 
-
-
-  
-   
 
 
     const tasks = useSelector((state: any) => state.tasks);
@@ -85,11 +84,33 @@ const TasksContainer = () => {
     }, [handleSubmit])
  */
 
+
+    useEffect(() => {
+        async function fetchData() {
+          try {
+            const {tasksFromDatabase } = await getOrderTask(user.uid);
+            dispatch(setTasks(tasksFromDatabase)); 
+            setData(tasksFromDatabase)
+            console.log("info db", tasksFromDatabase)
+            console.log("array task", tasks)
+          } catch (error) {
+            console.log(error);
+
+          }
+        }
+        fetchData();
+        
+      }, [user]);
+
+  
+      
+    
+
     return (
         <section className='d-flex justify-content-center'>
             <div>
                 <div style={{ minWidth: "700px" }} className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle mb-4'>
-                    {tasks.value.map((task: any) => (
+                    {tasks.value && Array.isArray(tasks.value) && tasks.value.map((task: any) => (
                         <div className='d-flex flex-column mb-1 border-bottom border-light-subtle p-2' key={task.id}>
                             <div className='d-flex flex-column'>
                                 <div className='d-flex'>
@@ -171,6 +192,7 @@ const TasksContainer = () => {
                 }
                 <TaskForm edit={edit} />
             </div>
+            
         </section>
     )
 }

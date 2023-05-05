@@ -19,7 +19,7 @@ const initialState: TaskState = {
         title: "Task 1",
         completed: false,
         description: "This is an example task",
-      },
+      }, 
     ],
   }
 
@@ -42,12 +42,15 @@ const initialState: TaskState = {
       },
       deleteTask: (state, action: PayloadAction<any>) => {
         state.value = state.value.filter((task: any) => task.id !== action.payload)
-      }
+      },
+      setTasks: (state, action: PayloadAction<any>) => {
+        state.value = action.payload;
+      },
 
     },
   })
   
-  export const { addTask, deleteTask, editTask } = taskSlice.actions
+  export const { addTask, deleteTask, editTask, setTasks } = taskSlice.actions
   
 
   export const selectCount = (state: RootState) => state.tasks.value

@@ -59,7 +59,7 @@ const TaskForm: React.FC<props>= ({edit}) => {
     });
   };
 
-  function sendInfo() {
+   function sendInfo() {
     const order = {
         userinfo: user?.uid,
         username: user?.displayName,
@@ -67,10 +67,10 @@ const TaskForm: React.FC<props>= ({edit}) => {
         date: new Date(),
       };
     createOrder(order)
-    }
+    } 
 
 
-    useEffect(() => {
+     useEffect(() => {
       if (user) {
         const timer = setTimeout(() => {
           sendInfo();
@@ -78,7 +78,9 @@ const TaskForm: React.FC<props>= ({edit}) => {
         
         return () => clearTimeout(timer);
       }
-    }, [handleSubmit, sendInfo, user]);
+    }, [handleSubmit]);
+
+
 
   return (
   <section>
@@ -97,7 +99,8 @@ const TaskForm: React.FC<props>= ({edit}) => {
         </div>
 
 
-        <button className='btn btn-success'>Save task</button> 
+        <button  /* onClick={sendInfo}  */className='btn btn-success'>Save task</button> 
+       {/*  <button onClick={}></button> */}
 
       </form>
 

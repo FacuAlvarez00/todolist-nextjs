@@ -19,9 +19,21 @@ export const auth = getAuth(app)
 
 export async function createOrder(order) {
 
-  const orderRef = doc(db, "order", order.username + " - " + order.userinfo);
+  const orderRef = doc(db, "order", order.userinfo);
   let respuesta = await setDoc(orderRef, order);
   return respuesta
+}
 
+export async function getOrderTask(uid) {
+  const orderRef = doc(db, "order", uid); 
+  const docSnap = await getDoc(orderRef); 
+
+  let tasksFromDatabase = null;
+  if (docSnap.exists()) {
+    tasksFromDatabase = docSnap.data().tasks; 
+  } 
+  return {
+    tasksFromDatabase,
+  };
   
 }
