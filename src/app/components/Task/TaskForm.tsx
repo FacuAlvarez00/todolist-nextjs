@@ -13,12 +13,13 @@ import {auth} from "../../../app/firebase"
 
 type props = {
   edit: any
+  data: any
+  handleTaskEdit: any
 }
 
-const TaskForm: React.FC<props>= ({edit}) => {
+const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
 
   const tasks = useSelector((state: any) => state.tasks);
-
   const user = useSelector((state: any) => state.user.user);
 
 
@@ -59,7 +60,8 @@ const TaskForm: React.FC<props>= ({edit}) => {
     });
   };
 
-   function sendInfo() {
+ 
+    function sendInfo() {
     const order = {
         userinfo: user?.uid,
         username: user?.displayName,
@@ -78,9 +80,9 @@ const TaskForm: React.FC<props>= ({edit}) => {
         
         return () => clearTimeout(timer);
       }
-    }, [handleSubmit]);
-
-
+    }, [tasks])    
+     
+ 
 
   return (
   <section>
@@ -99,7 +101,7 @@ const TaskForm: React.FC<props>= ({edit}) => {
         </div>
 
 
-        <button  /* onClick={sendInfo}  */className='btn btn-success'>Save task</button> 
+        <button       onClick={sendInfo}      className='btn btn-success'>Save task</button> 
        {/*  <button onClick={}></button> */}
 
       </form>

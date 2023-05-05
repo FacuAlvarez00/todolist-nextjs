@@ -40,3 +40,4 @@ https://github.com/FaztWeb/react-rtk-crud
 fix:
 -Tengo que ir al login y volver para que exista un user, el estado de user no persiste al F5. 
 Recuperar user a traves de alguna forma.
+-Hay que sumar los arrays, no pushear uno dentro de otro. Se anida el parametro value

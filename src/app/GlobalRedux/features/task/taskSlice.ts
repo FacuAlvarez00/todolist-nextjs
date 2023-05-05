@@ -8,20 +8,18 @@ const generateId = (): string => {
   return uuidv4();
 };
 
-interface TaskState {
-    value: any,
+
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-const initialState: TaskState = {
-    value: [
-      {
-        id: generateId(),
-        title: "Task 1",
-        completed: false,
-        description: "This is an example task",
-      }, 
-    ],
-  }
+
+const initialState: Task[] = [];
+
+
 
   export const taskSlice = createSlice({
     name: 'tasks',
@@ -29,22 +27,25 @@ const initialState: TaskState = {
     reducers: {
       addTask: (state, action: PayloadAction<any>) => {
         const newTask = { ...action.payload, id: generateId() };
-        state.value.push(newTask)
+        state.push(newTask)
       },
       editTask: (state, action: PayloadAction<any>) => {
         const { id, title, description, completed } = action.payload;
-        const task = state.value.find((task: any) => task.id === id);
+        const task = state.find((task: any) => task.id === id);
         if (task) {
           task.title = title;
           task.description = description;
           task.completed = completed;
         }
       },
-      deleteTask: (state, action: PayloadAction<any>) => {
-        state.value = state.value.filter((task: any) => task.id !== action.payload)
+      deleteTask: (state, action: PayloadAction<string>) => {
+        const index = state.findIndex((task) => task.id === action.payload);
+        if (index !== -1) {
+          state.splice(index, 1);
+        }
       },
       setTasks: (state, action: PayloadAction<any>) => {
-        state.value = action.payload;
+        return action.payload;
       },
 
     },
@@ -53,7 +54,7 @@ const initialState: TaskState = {
   export const { addTask, deleteTask, editTask, setTasks } = taskSlice.actions
   
 
-  export const selectCount = (state: RootState) => state.tasks.value
+  export const selectCount = (state: RootState) => state.tasks
   
   export default taskSlice.reducer
 

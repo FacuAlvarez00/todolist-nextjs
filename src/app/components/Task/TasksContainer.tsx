@@ -11,7 +11,7 @@ import { getOrderTask } from "../../firebase"
 
 
 const TasksContainer = () => {
-   
+
     const user = useSelector((state: any) => state.user.user);
 
 
@@ -47,9 +47,10 @@ const TasksContainer = () => {
 
     const handleTaskEdit = (id: any) => {
         setEdit(!edit)
-        const selectedTask = tasks.value.find((task: any) => task.id === id);
+        const selectedTask = tasks.find((task: any) => task.id === id);
         setSelectedTask(selectedTask)
     };
+    
     const displayedTaskEditHandler = () => {
         setDisplayedTaskEdit(!displayedTaskEdit)
 
@@ -79,38 +80,31 @@ const TasksContainer = () => {
         });
     };
 
-   /*  useEffect(() => {
-        console.log(tasks)
-    }, [handleSubmit])
- */
 
 
     useEffect(() => {
         async function fetchData() {
-          try {
-            const {tasksFromDatabase } = await getOrderTask(user.uid);
-            dispatch(setTasks(tasksFromDatabase)); 
-            setData(tasksFromDatabase)
-            console.log("info db", tasksFromDatabase)
-            console.log("array task", tasks)
-          } catch (error) {
-            console.log(error);
-
-          }
+            try {
+                const { tasksFromDatabase } = await getOrderTask(user.uid);
+                dispatch(setTasks(tasksFromDatabase));
+            } catch (error) {
+                console.log(error);
+            }
         }
         fetchData();
-        
-      }, [user]);
 
-  
-      
-    
+    }, [user]);
+
+    /*   console.log("array task", tasks)
+      console.log("info db", data) */
+
+
 
     return (
         <section className='d-flex justify-content-center'>
             <div>
                 <div style={{ minWidth: "700px" }} className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle mb-4'>
-                    {tasks.value && Array.isArray(tasks.value) && tasks.value.map((task: any) => (
+                    {tasks && Array.isArray(tasks) && tasks.map((task: any) => (
                         <div className='d-flex flex-column mb-1 border-bottom border-light-subtle p-2' key={task.id}>
                             <div className='d-flex flex-column'>
                                 <div className='d-flex'>
@@ -125,7 +119,7 @@ const TasksContainer = () => {
 
 
                                 <div>
-                                    {displayedTask === task.id ? <p style={{margin: "0"}} className='fs-5'>{task.description}</p> : null}
+                                    {displayedTask === task.id ? <p style={{ margin: "0" }} className='fs-5'>{task.description}</p> : null}
                                 </div>
                             </div>
 
@@ -165,7 +159,7 @@ const TasksContainer = () => {
 
                                         <input onChange={handleChange} type="checkbox" className="btn-check" id="btncheck1" name='completed' defaultChecked={selectedTask.completed} />
 
-                                        <label className={selectedTask.completed? "btn btn-outline-primary mb-2" : "btn btn-outline-danger mb-2" } htmlFor='btncheck1' >
+                                        <label className={selectedTask.completed ? "btn btn-outline-primary mb-2" : "btn btn-outline-danger mb-2"} htmlFor='btncheck1' >
 
                                             {
                                                 selectedTask.completed ? "Completed" : "Not Completed"
@@ -173,7 +167,7 @@ const TasksContainer = () => {
                                         </label>
                                     </div>
 
-                                 {/*    <label className='fs-5'>
+                                    {/*    <label className='fs-5'>
                                         Completed:
                                         <input onChange={handleChange} type="checkbox" name="completed" defaultChecked={selectedTask.completed} />
                                     </label> */}
@@ -190,9 +184,9 @@ const TasksContainer = () => {
                         :
                         null
                 }
-                <TaskForm edit={edit} />
+                <TaskForm edit={edit} data={data} handleTaskEdit={handleTaskEdit} />
             </div>
-            
+
         </section>
     )
 }
