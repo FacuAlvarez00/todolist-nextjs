@@ -8,17 +8,21 @@ const generateId = (): string => {
   return uuidv4();
 };
 
-
 interface Task {
-  id: string;
+ /*  id: string;
   title: string;
   description: string;
-  completed: boolean;
+  completed: boolean; */
 }
 
-
-const initialState: Task[] = [];
-
+const initialState: Task[] = [
+  {
+   /*  id: generateId(),
+    title: "Task 1",
+    completed: false,
+    description: "This is an example task", */
+  }, 
+];
 
 
   export const taskSlice = createSlice({

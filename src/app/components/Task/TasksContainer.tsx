@@ -85,8 +85,10 @@ const TasksContainer = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const { tasksFromDatabase } = await getOrderTask(user.uid);
-                dispatch(setTasks(tasksFromDatabase));
+                if (user) { 
+                    const { tasksFromDatabase } = await getOrderTask(user.uid);
+                    dispatch(setTasks(tasksFromDatabase));
+                }
             } catch (error) {
                 console.log(error);
             }
