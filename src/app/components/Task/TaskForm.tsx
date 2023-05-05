@@ -80,7 +80,7 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
         
         return () => clearTimeout(timer);
       }
-    }, [tasks])    
+    }, [tasks, user])    
      
  
 

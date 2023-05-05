@@ -9,18 +9,18 @@ const generateId = (): string => {
 };
 
 interface Task {
- /*  id: string;
+  id: string;
   title: string;
   description: string;
-  completed: boolean; */
+  completed: boolean; 
 }
 
 const initialState: Task[] = [
   {
-   /*  id: generateId(),
+    id: generateId(),
     title: "Task 1",
     completed: false,
-    description: "This is an example task", */
+    description: "This is an example task", 
   }, 
 ];
 

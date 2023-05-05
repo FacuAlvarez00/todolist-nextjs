@@ -81,7 +81,7 @@ const TasksContainer = () => {
     };
 
 
-
+/* 
     useEffect(() => {
         async function fetchData() {
             try {
@@ -96,6 +96,24 @@ const TasksContainer = () => {
         fetchData();
 
     }, [user]);
+ */
+
+    useEffect(() => {
+        const timeoutId = setTimeout(async () => {
+          try {
+            if (user) { 
+              const { tasksFromDatabase } = await getOrderTask(user.uid);
+              dispatch(setTasks(tasksFromDatabase));
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }, 1000); 
+      
+        return () => clearTimeout(timeoutId); 
+      
+      }, [user]);
+
 
     /*   console.log("array task", tasks)
       console.log("info db", data) */
