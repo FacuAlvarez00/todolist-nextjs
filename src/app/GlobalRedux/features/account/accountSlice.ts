@@ -8,10 +8,6 @@ import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from
 import { useDispatch } from "react-redux";
 
 
-
-
-
-
 const generateId = (): string => {
     return uuidv4();
   };
@@ -24,7 +20,6 @@ const initialState: UserState = {
   user: null
 }
 
-
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider()
     signInWithPopup(auth, provider)
@@ -35,7 +30,7 @@ const initialState: UserState = {
   signOut(auth)
   }
 
-  const pointsAtZero = 0
+
 
   const handleSignOut = async () => {
   try {
@@ -74,7 +69,7 @@ export const userSlice = createSlice({
 export const { setUser, removeUser } = userSlice.actions
 
 
-export const selectCount = (state: RootState) => state.tasks.value
+export const selectCount = (state: RootState) => state.tasks
 
 export default userSlice.reducer
 
