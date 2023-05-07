@@ -35,7 +35,7 @@ const Navbar = () => {
     {user? (
      <>
    {/*    <p className="nav-link active">Signed as {user.displayName}</p> */}
-      <a className="nav-link active" onClick={handleSignOut}>Logout</a>
+      <p className="nav-link active pe-auto button_account" onClick={handleSignOut}>Logout</p>
      </>
     ):(
       <>

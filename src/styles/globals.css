@@ -12,3 +12,13 @@ footer{
   height: 60px;   
 
 }
+
+.tasks__holder  {
+  min-width: 700px;
+  max-height: 400px; 
+  overflow-y: auto;
+}
+
+.button_account{
+  cursor: pointer;
+}

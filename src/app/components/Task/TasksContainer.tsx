@@ -10,13 +10,15 @@ import TaskForm from './TaskForm';
 import { getOrderTask } from "../../firebase"
 
 
+
 const TasksContainer = () => {
 
     const user = useSelector((state: any) => state.user.user);
 
 
     const [data, setData] = useState<any>([])
-    const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState<boolean>(false);
+    const [taskState, setTaskState] = useState<boolean>(false)
     const [selectedTask, setSelectedTask] = useState<any>()
     const [displayedTask, setDisplayedTask] = useState<any>()
     const [displayedTaskEdit, setDisplayedTaskEdit] = useState<boolean>(false)
@@ -40,6 +42,10 @@ const TasksContainer = () => {
 
     const tasks = useSelector((state: any) => state.tasks);
     const dispatch = useDispatch();
+
+    const handleTaskCompleted = () => {
+        setTaskState(!taskState)
+    }
 
     const handleTaskDelete = (id: any) => {
         dispatch(deleteTask(id))
@@ -123,7 +129,7 @@ const TasksContainer = () => {
     return (
         <section className='d-flex justify-content-center'>
             <div>
-                <div style={{ minWidth: "700px" }} className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle mb-4'>
+                <div className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle mb-4'>
                     {tasks && Array.isArray(tasks) && tasks.map((task: any) => (
                         <div className='d-flex flex-column mb-1 border-bottom border-light-subtle p-2' key={task.id}>
                             <div className='d-flex flex-column'>
@@ -145,8 +151,12 @@ const TasksContainer = () => {
 
                             <div className='d-flex justify-content-between gap-2 me-2 mb-1'>
 
-                                <div className='d-flex align-items-end'>
-                                    {task.completed ? <span className='text-success'>Completed</span> : <span className='text-danger'>Not Completed</span>
+                                <div  className='d-flex align-items-end'>
+                                    {
+                                    task.completed ? 
+                                    (<span className='text-success'>Completed</span>)
+                                    :
+                                    (<span className='text-danger'>Not Completed</span>)
                                     }
 
                                 </div>
@@ -170,6 +180,9 @@ const TasksContainer = () => {
                     edit && selectedTask ?
                         <>
                             <h1>Editing task...</h1>
+
+                            <div className='editForm_wrapper'>
+
                             <form onSubmit={handleSubmit}>
                                 <div className='d-flex flex-column input-group input-group-lg'>
                                     <input maxLength={40} onChange={handleChange} name="title" type="text" defaultValue={selectedTask.title} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" style={{ height: "80px" }} />
@@ -179,10 +192,19 @@ const TasksContainer = () => {
 
                                         <input onChange={handleChange} type="checkbox" className="btn-check" id="btncheck1" name='completed' defaultChecked={selectedTask.completed} />
 
-                                        <label className={selectedTask.completed ? "btn btn-outline-primary mb-2" : "btn btn-outline-danger mb-2"} htmlFor='btncheck1' >
+                                        <label onClick={handleTaskCompleted} className=
+                                            {
+                                                selectedTask.completed ? 
+                                                (taskState? "btn btn-danger mb-2" : "btn btn-success mb-2") : 
+                                                (taskState? "btn btn-danger mb-2" : "btn btn-success mb-2")
+                                            } 
+                                            htmlFor='btncheck1' >
 
                                             {
-                                                selectedTask.completed ? "Completed" : "Not Completed"
+                                                selectedTask.completed ?
+                                                 (taskState? "Completed" : "Not completed" )
+                                                 : 
+                                                 (taskState? "Not Completed" : "Completed")
                                             }
                                         </label>
                                     </div>
@@ -194,12 +216,15 @@ const TasksContainer = () => {
 
                                 </div>
                                 <div className='d-flex gap-2'>
-                                    <button className='btn btn-success'>Confirm</button>
-                                    <button style={{ color: "black" }} onClick={handleTaskEdit} className='btn btn-warning fw-semibold'>Cancel</button>
+                                    <button className='btn btn-primary'>Confirm</button>
+                                    <button onClick={handleTaskEdit} className='btn btn-secondary '>Cancel</button>
                                 </div>
 
 
                             </form>
+                                
+                            </div>
+                          
                         </>
                         :
                         null

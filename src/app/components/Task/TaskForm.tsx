@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { addTask } from '../../GlobalRedux/features/task/taskSlice';
 import { setUser } from '../../GlobalRedux/features/account/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +23,8 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
   const user = useSelector((state: any) => state.user.user);
 
 
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,6 +45,7 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch(addTask(task));
+    e.target.reset();
     
   }
 
@@ -53,6 +56,13 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
     });
   };
 
+/*   const ref = useRef<HTMLInputElement>(null); */
+/* 
+  const clearInputs = () => {
+    ref.current.value = "";
+
+  };
+ */
   const handleCompletedChange = () => {
     setTask({
       ...task,
@@ -90,7 +100,7 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
       edit ? null :  <div className='d-flex justify-content-center'>
       <form onSubmit={handleSubmit}>
         <div className='d-flex flex-column input-group input-group-lg'>
-          <input maxLength={40} style={{ width: "400px", height: "50px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="title" required />
+          <input /* ref={ref} */ maxLength={40} style={{ width: "400px", height: "50px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="title" required />
           <textarea maxLength={120} style={{ width: "400px", height: "120px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='description' required />
           <label className='mb-2'>
            <span className='fs-5'>Completed:</span> 
@@ -102,6 +112,7 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
 
 
         <button       onClick={sendInfo}      className='btn btn-success'>Save task</button> 
+        <button       onClick={sendInfo}      className='btn btn-success'>Clear</button> 
        {/*  <button onClick={}></button> */}
 
       </form>
