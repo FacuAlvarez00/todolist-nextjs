@@ -5,9 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteTask, addTask, editTask, setTasks } from '../../GlobalRedux/features/task/taskSlice';
 import { AiFillCheckCircle } from "react-icons/ai"
 import { RxCrossCircled } from "react-icons/rx"
-import { RiArrowDropDownLine } from "react-icons/ri"
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri"
 import TaskForm from './TaskForm';
 import { getOrderTask } from "../../firebase"
+import {taskDeleted, taskEdited, confirmationAlert}  from '../../utils/sweetalert';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -15,8 +18,7 @@ const TasksContainer = () => {
 
     const user = useSelector((state: any) => state.user.user);
 
-
-    const [data, setData] = useState<any>([])
+    const [dataLoaded, setDataLoaded] = useState(false);
     const [edit, setEdit] = useState<boolean>(false);
     const [taskState, setTaskState] = useState<boolean>(false)
     const [selectedTask, setSelectedTask] = useState<any>()
@@ -36,6 +38,7 @@ const TasksContainer = () => {
             description: selectedTask ? selectedTask.description : "",
             completed: selectedTask ? selectedTask.completed : "",
         });
+      
     }, [selectedTask]);
 
 
@@ -47,16 +50,49 @@ const TasksContainer = () => {
         setTaskState(!taskState)
     }
 
-    const handleTaskDelete = (id: any) => {
-        dispatch(deleteTask(id))
-    };
+    function confirmationAlert(id: any){
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "Changes can't be reverted",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteTask(id)) 
+                taskDeleted()
+                
+            } else if (
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+            }
+          })
+    }
+    
+
+/*     const handleTaskDelete = (id: any) => {
+        dispatch(deleteTask(id)) 
+        confirmationAlert()
+    }; */
 
     const handleTaskEdit = (id: any) => {
         setEdit(!edit)
         const selectedTask = tasks.find((task: any) => task.id === id);
         setSelectedTask(selectedTask)
+      /*   setTaskState(!taskState) */
+      
     };
-    
+        
     const displayedTaskEditHandler = () => {
         setDisplayedTaskEdit(!displayedTaskEdit)
 
@@ -65,6 +101,7 @@ const TasksContainer = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         dispatch(editTask({ id: selectedTask.id, ...editedTask }))
+        taskEdited()
         setEdit(!edit)
     }
 
@@ -110,13 +147,16 @@ const TasksContainer = () => {
             if (user) { 
               const { tasksFromDatabase } = await getOrderTask(user.uid);
               dispatch(setTasks(tasksFromDatabase));
+              setDataLoaded(true);
             }
           } catch (error) {
             console.log(error);
           }
-        }, 1000); 
+        },); 
       
         return () => clearTimeout(timeoutId); 
+        
+
       
       }, [user]);
 
@@ -124,8 +164,8 @@ const TasksContainer = () => {
     /*   console.log("array task", tasks)
       console.log("info db", data) */
 
-
-
+    
+      console.log(taskState)
     return (
         <section className='d-flex justify-content-center'>
             <div>
@@ -138,7 +178,13 @@ const TasksContainer = () => {
                                     {/*   {task.completed ? <AiFillCheckCircle style={{ width: "30px", height: "30px" }} /> : <RxCrossCircled style={{ width: "30px", height: "30px" }} />} */}
 
                                     <span role="button" onClick={() => handleDisplay(task.id)}>
-                                        <RiArrowDropDownLine style={{ width: "30px", height: "30px" }} />
+                                        {displayedTask === task.id ? 
+                                        <RiArrowDropDownLine className='display_arrow' style={{ width: "30px", height: "30px" }} />
+                                        :
+                                        <RiArrowDropUpLine className='display_arrow' style={{ width: "30px", height: "30px" }} />
+
+                                        }
+                                        
                                     </span>
 
                                 </div>
@@ -152,18 +198,20 @@ const TasksContainer = () => {
                             <div className='d-flex justify-content-between gap-2 me-2 mb-1'>
 
                                 <div  className='d-flex align-items-end'>
+                                    
                                     {
                                     task.completed ? 
+                                    
                                     (<span className='text-success'>Completed</span>)
                                     :
-                                    (<span className='text-danger'>Not Completed</span>)
+                                    (<span className='text-danger'>Uncompleted</span>)
                                     }
 
                                 </div>
 
                                 <div className='d-flex gap-2'>
                                     <button className='btn btn-dark' onClick={() => handleTaskEdit(task.id)}>Edit</button>
-                                    <button className='btn btn-danger' onClick={() => handleTaskDelete(task.id)}>Delete</button>
+                                    <button className='btn btn-danger' onClick={() => confirmationAlert(task.id)}>Delete</button>
 
                                 </div>
 
@@ -185,8 +233,8 @@ const TasksContainer = () => {
 
                             <form onSubmit={handleSubmit}>
                                 <div className='d-flex flex-column input-group input-group-lg'>
-                                    <input maxLength={40} onChange={handleChange} name="title" type="text" defaultValue={selectedTask.title} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" style={{ height: "80px" }} />
-                                    <textarea maxLength={120} onChange={handleChange} name="description" defaultValue={selectedTask.description} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" style={{ height: "120px" }} />
+                                    <input style={{textAlign: "start", height: "80px"}} maxLength={40} onChange={handleChange} name="title" type="text" defaultValue={selectedTask.title} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" />
+                                    <textarea maxLength={120} onChange={handleChange} name="description" defaultValue={selectedTask.description} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" style={{ textAlign: "start", height: "120px" }} />
 
                                     <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 
@@ -196,23 +244,18 @@ const TasksContainer = () => {
                                             {
                                                 selectedTask.completed ? 
                                                 (taskState? "btn btn-danger mb-2" : "btn btn-success mb-2") : 
-                                                (taskState? "btn btn-danger mb-2" : "btn btn-success mb-2")
+                                                (taskState? "btn btn-success mb-2" : "btn btn-danger mb-2")
                                             } 
                                             htmlFor='btncheck1' >
 
                                             {
                                                 selectedTask.completed ?
-                                                 (taskState? "Completed" : "Not completed" )
+                                                 (taskState? "Uncompleted" : "Completed" )
                                                  : 
-                                                 (taskState? "Not Completed" : "Completed")
+                                                 (taskState? "Completed" : "Uncompleted")
                                             }
                                         </label>
                                     </div>
-
-                                    {/*    <label className='fs-5'>
-                                        Completed:
-                                        <input onChange={handleChange} type="checkbox" name="completed" defaultChecked={selectedTask.completed} />
-                                    </label> */}
 
                                 </div>
                                 <div className='d-flex gap-2'>
@@ -229,7 +272,7 @@ const TasksContainer = () => {
                         :
                         null
                 }
-                <TaskForm edit={edit} data={data} handleTaskEdit={handleTaskEdit} />
+                <TaskForm edit={edit} dataLoaded={dataLoaded} />
             </div>
 
         </section>

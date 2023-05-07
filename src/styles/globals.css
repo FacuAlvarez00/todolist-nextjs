@@ -22,3 +22,10 @@ footer{
 .button_account{
   cursor: pointer;
 }
+
+.display_arrow:hover{
+  scale: 105%;
+}
+.btn-with-margin{
+  margin-right: 10px;
+}

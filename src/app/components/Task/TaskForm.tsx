@@ -7,20 +7,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import {createOrder} from "../../firebase"
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from "../../../app/firebase"
+import {infoSent}  from '../../utils/sweetalert';
 
 
 
 
 type props = {
   edit: any
-  data: any
-  handleTaskEdit: any
+  dataLoaded: any
 }
 
-const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
+const TaskForm: React.FC<props>= ({edit, dataLoaded}) => {
 
   const tasks = useSelector((state: any) => state.tasks);
   const user = useSelector((state: any) => state.user.user);
+
+  const [completed, setCompleted] = useState<boolean>(false)
+
+  const handleCompleted = () => {
+    setCompleted(!completed)
+    }
 
 
 
@@ -46,6 +52,8 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
     e.preventDefault();
     dispatch(addTask(task));
     e.target.reset();
+    infoSent()
+    setCompleted(true)
     
   }
 
@@ -79,19 +87,19 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
         date: new Date(),
       };
     createOrder(order)
+    setCompleted(true)
     } 
 
 
-     useEffect(() => {
-      if (user) {
+   useEffect(() => {
+      if (user && dataLoaded) {
         const timer = setTimeout(() => {
-          sendInfo();
-        }, 500);
+          sendInfo(); 
+        },);
         
         return () => clearTimeout(timer);
       }
-    }, [tasks, user])    
-     
+    }, [tasks, user, dataLoaded])    
  
 
   return (
@@ -99,21 +107,33 @@ const TaskForm: React.FC<props>= ({edit, data, handleTaskEdit}) => {
     {
       edit ? null :  <div className='d-flex justify-content-center'>
       <form onSubmit={handleSubmit}>
+      <h1>Add your task</h1>
         <div className='d-flex flex-column input-group input-group-lg'>
-          <input /* ref={ref} */ maxLength={40} style={{ width: "400px", height: "50px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="title" required />
-          <textarea maxLength={120} style={{ width: "400px", height: "120px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='description' required />
-          <label className='mb-2'>
+          <input /* ref={ref} */ maxLength={40} style={{ width: "700px", height: "80px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="Title" required />
+          <textarea maxLength={120} style={{ width: "100%", height: "120px"}} className='mb-2 input-group-text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='Description' required />
+
+         {/*  <label className='mb-2'>
            <span className='fs-5'>Completed:</span> 
             <input type="checkbox" checked={task.completed} onChange={handleCompletedChange} />
-          </label>
-        
+          </label> */}
+          <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 
+          <input type="checkbox" className="btn-check" id="btncheck1" name='completed' onChange={handleCompletedChange}  />
+        
+        <label onClick={handleCompleted} htmlFor='btncheck1'className={
+        completed? "btn btn-success mb-2" : "btn btn-danger mb-2"}>
+                          {completed?  "Completed" : "Uncompleted"}
+        </label>
+
+          </div>
+
+      
+      
         </div>
 
+        <button      /*   onClick={sendInfo}   */   className='btn btn-primary  '>Save task</button> 
+     
 
-        <button       onClick={sendInfo}      className='btn btn-success'>Save task</button> 
-        <button       onClick={sendInfo}      className='btn btn-success'>Clear</button> 
-       {/*  <button onClick={}></button> */}
 
       </form>
 
