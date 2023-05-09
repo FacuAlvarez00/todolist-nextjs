@@ -54,7 +54,7 @@ export function infoSent() {
     })
     
     Toast.fire({
-      icon: 'warning',
+      icon: 'info',
       title: 'Task edited!'
     })
   }

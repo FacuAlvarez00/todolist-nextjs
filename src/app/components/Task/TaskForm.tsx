@@ -131,7 +131,14 @@ const TaskForm: React.FC<props>= ({edit, dataLoaded}) => {
       
         </div>
 
-        <button      /*   onClick={sendInfo}   */   className='btn btn-primary  '>Save task</button> 
+        {dataLoaded?
+        <button className='btn btn-primary '>Save task</button> 
+        :
+        <button className='btn btn-primary disabled'>Save task</button> 
+
+
+        }
+        
      
 
 

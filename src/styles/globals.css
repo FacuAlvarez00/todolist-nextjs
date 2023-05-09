@@ -29,3 +29,40 @@ footer{
 .btn-with-margin{
   margin-right: 10px;
 }
+
+.form-check{
+  display: flex !important;
+  gap: 10px !important;
+  margin-bottom: 10px !important;
+
+}
+
+.form-switch .form-check-input {
+  width: 2.5em !important;
+  height: 1.2em !important;
+}
+
+/* .form-switch .form-check-input{
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.form-check-input{
+  width: 1em;
+  height: 1em;
+  margin-top: 0.25em;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 5px solid rgba(0,0,0,.25);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+ */
+ .conditional_div{
+  display: flex;
+  flex-direction: column;
+ }
