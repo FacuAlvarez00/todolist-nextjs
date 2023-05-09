@@ -228,6 +228,7 @@ const TasksContainer = () => {
                     edit && selectedTask ?
                         <>
                             <h1>Editing task...</h1>
+                            
 
                             <div className='editForm_wrapper'>
 
@@ -236,11 +237,12 @@ const TasksContainer = () => {
                                     <input style={{textAlign: "start", height: "80px"}} maxLength={40} onChange={handleChange} name="title" type="text" defaultValue={selectedTask.title} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" />
                                     <textarea maxLength={120} onChange={handleChange} name="description" defaultValue={selectedTask.description} required className='mb-2 input-group-text' id="inputGroup-sizing-lg" style={{ textAlign: "start", height: "120px" }} />
 
-                                    <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                     
 
-                                        <input onChange={handleChange} type="checkbox" className="btn-check" id="btncheck1" name='completed' defaultChecked={selectedTask.completed} />
+                                  {/*   <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 
-                                        <label onClick={handleTaskCompleted} className=
+
+                                         <label onClick={handleTaskCompleted} className=
                                             {
                                                 selectedTask.completed ? 
                                                 (taskState? "btn btn-danger mb-2" : "btn btn-success mb-2") : 
@@ -254,8 +256,8 @@ const TasksContainer = () => {
                                                  : 
                                                  (taskState? "Completed" : "Uncompleted")
                                             }
-                                        </label>
-                                    </div>
+                                        </label> 
+                                    </div> */}
 
                                 </div>
                                 <div className='d-flex gap-2'>
