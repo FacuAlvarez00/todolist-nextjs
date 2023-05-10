@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../app/GlobalRedux/features/account/accountSlice';
+import GoogleButton from 'react-google-button'
 import Link from "next/link"
 
 
@@ -51,9 +52,7 @@ export default function SignIn() {
   return (
     <div>
         <h2>Account panel</h2>
-        <Link href="/">
-        Return home
-        </Link>
+      
         
         {user ? (
             <>
@@ -65,7 +64,7 @@ export default function SignIn() {
       ) : (
         <>
            <p>Please sign in.</p>
-            <button onClick={handleSignIn}>Sign In!</button>
+            <GoogleButton onClick={handleSignIn}/>
         </>
 
         

@@ -15,9 +15,12 @@ import {infoSent}  from '../../utils/sweetalert';
 type props = {
   edit: any
   dataLoaded: any
+  setTasksFromLocalStorage: any
+  tasksFromLocalStorage: any
 }
 
-const TaskForm: React.FC<props>= ({edit, dataLoaded}) => {
+const TaskForm: React.FC<props>= ({edit, dataLoaded,
+  setTasksFromLocalStorage, tasksFromLocalStorage}) => {
 
   const tasks = useSelector((state: any) => state.tasks);
   const user = useSelector((state: any) => state.user.user);
@@ -100,7 +103,19 @@ const TaskForm: React.FC<props>= ({edit, dataLoaded}) => {
         return () => clearTimeout(timer);
       }
     }, [tasks, user, dataLoaded])    
- 
+
+ /*    useEffect(() => {
+      if (user === null && dataLoaded) {
+        const timer = setTimeout(() => {
+          localStorage.setItem("tasks", JSON.stringify(tasks))
+          console.log("test")
+        },);
+        
+        return () => clearTimeout(timer);
+      }
+    }, [tasks, user, dataLoaded])   
+  */
+
 
   return (
   <section>
