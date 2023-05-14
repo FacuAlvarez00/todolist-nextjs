@@ -29,9 +29,9 @@ const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handl
         <div>
             <div className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle mb-4'>
                 {tasks && Array.isArray(tasks) && tasks.map((task: any) => (
-                    <div className='d-flex flex-column mb-1 border-bottom border-light-subtle p-2' key={task.id}>
-                        <div className='d-flex flex-column'>
-                            <div className='d-flex'>
+                    <div className=' mb-1 border-bottom border-light-subtle p-2' key={task.id}>
+                        <div className=''>
+                            <div className=''>
                                 <h4 className='fw-semibold'>{task.title}</h4>
 
                                 <span role="button" onClick={() => handleDisplay(task.id)}>

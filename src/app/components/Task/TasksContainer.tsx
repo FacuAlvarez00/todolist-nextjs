@@ -167,7 +167,7 @@ const TasksContainer = () => {
 
     return (
 
-        <section className='d-flex justify-content-center'>
+        <section className='tasksContainer'>
             {dataLoaded ?
                 <div>
                 {user? <p>User logued</p> : <p>GUEST</p>}

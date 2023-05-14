@@ -66,3 +66,50 @@ footer{
   display: flex;
   flex-direction: column;
  }
+
+ /* TasksContainer */
+ .tasksContainer{
+/*   padding: 0 20rem; */
+width: 100%;
+ }
+
+ /* TaskForm */
+
+ .form__container{
+  width: 100vh;
+  padding: 0 50px;
+
+
+ }
+
+ .formField{
+  width: 100%;
+  height: 80px;
+ }
+ .formField__text{
+  width: 100%;
+  height: 120px;
+ }
+
+ /* TaskDetail */
+
+ .tasks__holder{
+  width: 100vh;
+  padding: 0 50px;
+ }
+
+
+
+ @media only screen and (min-width: 1000px) {
+  .formField{
+    width: 700px;
+    height: 80px;
+   }
+   .formField__text{
+    width: 100%;
+    height: 120px;
+   }
+  
+ }
+  
+ 
