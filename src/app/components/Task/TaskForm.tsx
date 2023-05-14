@@ -119,25 +119,25 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
 
 
   return (
-    <section className='form__container'>
+    <section className='form__container mt-5'>
       {
         edit ? null : 
           <form onSubmit={handleSubmit}>
-            <h1>Add your task</h1>
+            <h1 className='form__container__title'>Add your task</h1>
             <div className='input-group input-group-lg'>
               <input /* ref={ref} */ maxLength={40} className='mb-2 input-group-text formField' id="inputGroup-sizing-lg" onChange={handleChange} name="title" type="text" placeholder="Title" required />
-              <textarea maxLength={120} className='mb-2 input-group-text formField__text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='Description' required />
+              <textarea maxLength={120} className='mb-4 input-group-text formField__text' id="inputGroup-sizing-lg" onChange={handleChange} name="description" placeholder='Description' required />
 
               {/*  <label className='mb-2'>
            <span className='fs-5'>Completed:</span> 
             <input type="checkbox" checked={task.completed} onChange={handleCompletedChange} />
           </label> */}
-              <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+              <div className="btn-group btn-status" role="group" aria-label="Basic checkbox toggle button group">
 
                 <input type="checkbox" className="btn-check" id="btncheck1" name='completed' onChange={handleCompletedChange} />
 
                 <label onClick={handleCompleted} htmlFor='btncheck1' className={
-                  completed ? "btn btn-success mb-2" : "btn btn-danger mb-2"}>
+                  completed ? "btn btn-success mb-2 btn-status" : "btn btn-danger mb-2 btn-status"}>
                   {completed ? "Completed" : "Uncompleted"}
                 </label>
 
@@ -145,9 +145,9 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
             </div>
 
             {dataLoaded ?
-              <button className='btn btn-primary '>Save task</button>
+              <button className='btn btn-primary btn-save'>Save task</button>
               :
-              <button className='btn btn-primary disabled'>Save task</button>
+              <button className='btn btn-primary disabled btn-save'>Save task</button>
             }
 
 

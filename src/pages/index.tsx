@@ -1,5 +1,5 @@
 import Footer from "@/app/components/Footer/Footer";
-import Navbar from "@/app/components/Navbar/Navbar";
+import Navbar from "@/app/components/Navbarzera/Navbarzera";
 import TaskForm from "@/app/components/Task/TaskForm";
 import TasksContainer from "@/app/components/Task/TasksContainer";
 

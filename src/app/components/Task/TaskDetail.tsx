@@ -29,16 +29,16 @@ const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handl
         <div>
             <div className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle mb-4'>
                 {tasks && Array.isArray(tasks) && tasks.map((task: any) => (
-                    <div className=' mb-1 border-bottom border-light-subtle p-2' key={task.id}>
-                        <div className=''>
+                    <div className=' mb-1 border-bottom border-light-subtle task' key={task.id}>
+                  
                             <div className=''>
-                                <h4 className='fw-semibold'>{task.title}</h4>
+                                <h4 className='fw-semibold task__title'>{task.title}</h4>
 
                                 <span role="button" onClick={() => handleDisplay(task.id)}>
                                     {displayedTask === task.id ?
-                                        <RiArrowDropDownLine className='display_arrow' style={{ width: "30px", height: "30px" }} />
+                                        <RiArrowDropDownLine className='display_arrow'  />
                                         :
-                                        <RiArrowDropUpLine className='display_arrow' style={{ width: "30px", height: "30px" }} />
+                                        <RiArrowDropUpLine className='display_arrow'  />
 
                                     }
 
@@ -48,9 +48,9 @@ const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handl
 
 
                             <div>
-                                {displayedTask === task.id ? <p style={{ margin: "0" }} className='fs-5 fst-italic'>{task.description}</p> : null}
+                                {displayedTask === task.id ? <p style={{ margin: "0" }} className='fst-italic task__desc'>{task.description}</p> : null}
                             </div>
-                        </div>
+                     
 
                         <div className='d-flex justify-content-between gap-2 me-2 mb-1'>
 
@@ -67,8 +67,8 @@ const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handl
                             </div>
 
                             <div className='d-flex gap-2'>
-                                <button className='btn btn-dark' onClick={() => handleTaskEdit(task.id)}>Edit</button>
-                                <button className='btn btn-danger' onClick={() => confirmationAlert(task.id)}>Delete</button>
+                                <button className='btn btn-dark btn__task' onClick={() => handleTaskEdit(task.id)}>Edit</button>
+                                <button className='btn btn-danger btn__task' onClick={() => confirmationAlert(task.id)}>Delete</button>
 
                             </div>
 
