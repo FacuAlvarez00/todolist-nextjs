@@ -27,7 +27,7 @@ const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handl
 
     return (
         <div>
-            <div className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle mb-4'>
+            <div className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle '>
                 {tasks && Array.isArray(tasks) && tasks.map((task: any) => (
                     <div className=' mb-1 border-bottom border-light-subtle task' key={task.id}>
                   
@@ -47,7 +47,7 @@ const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handl
                             </div>
 
 
-                            <div>
+                            <div className='mb-3'>
                                 {displayedTask === task.id ? <p style={{ margin: "0" }} className='fst-italic task__desc'>{task.description}</p> : null}
                             </div>
                      
