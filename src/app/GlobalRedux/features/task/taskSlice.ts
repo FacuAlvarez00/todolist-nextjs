@@ -51,11 +51,13 @@ const initialState: Task[] = [
       setTasks: (state, action: PayloadAction<any>) => {
         return action.payload;
       },
-
+      clearTasks: (state) => {
+        return [];
+      }
     },
   })
   
-  export const { addTask, deleteTask, editTask, setTasks } = taskSlice.actions
+  export const { addTask, deleteTask, editTask, setTasks, clearTasks } = taskSlice.actions
   
 
   export const selectCount = (state: RootState) => state.tasks

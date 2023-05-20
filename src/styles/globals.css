@@ -64,7 +64,6 @@
 
 
 
-   
   
    /* TasksContainer */
    .tasksContainer{
@@ -87,7 +86,7 @@
     height: 80px;
    }
    ::placeholder{
-    font-size: 20px;
+    font-size: 17px;
    }
    .btn-status{
     width: 100%;
@@ -122,8 +121,31 @@
     height: 30px;
   }
   .btn__task{
-    font-size: 13px !important;
+    font-size: 14px !important;
   }
+
+  /* TaskDetail */
+
+  .editForm_wrapper{
+    padding: 0 30px;
+  }
+  .editForm_wrapper h2{
+    font-size: 25px;
+  }
+  .input-edit{
+    text-align: start !important;
+    font-size: 17px !important;
+  }
+  .input-edit-title{
+    height: 40px !important;
+  }
+  .input-edit-text{
+    height: 80px !important;
+  }
+  
+
+  
+
   
   
    @media only screen and (min-width: 1000px) {
