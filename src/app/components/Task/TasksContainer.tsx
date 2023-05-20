@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteTask, addTask, editTask, setTasks } from '../../GlobalRedux/features/task/taskSlice';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri"
@@ -10,12 +10,15 @@ import { taskDeleted, taskEdited, confirmationAlert } from '../../utils/sweetale
 import Swal from 'sweetalert2';
 import TaskDetail from './TaskDetail';
 import TaskEdit from './TaskEdit';
+import { UserAuth } from '@/app/context/AppContext';
 
 
 
 
 
 const TasksContainer = () => {
+
+
 
     const user = useSelector((state: any) => state.user.user);
     const [tasksFromLocalStorage, setTasksFromLocalStorage] = useState<any>()
@@ -31,6 +34,10 @@ const TasksContainer = () => {
         completed: selectedTask ? selectedTask.completed : "",
     }
     );
+
+    const { userChanged } = UserAuth()
+
+    console.log(userChanged)
 
 
     useEffect(() => {
@@ -161,6 +168,7 @@ const TasksContainer = () => {
         return () => clearTimeout(timeoutId);
     }, [user]);
 
+ 
     
  
 

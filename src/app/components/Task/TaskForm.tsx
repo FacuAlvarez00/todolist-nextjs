@@ -8,6 +8,7 @@ import { createOrder } from "../../firebase"
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../app/firebase"
 import { infoSent } from '../../utils/sweetalert';
+import { UserAuth } from '@/app/context/AppContext';
 
 
 
@@ -25,13 +26,7 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
 
   const tasks = useSelector((state: any) => state.tasks);
   const user = useSelector((state: any) => state.user.user);
-
-  const [completed, setCompleted] = useState<boolean>(false)
-
-  const handleCompleted = () => {
-    setCompleted(!completed)
-  }
-
+  const { userChanged, setUserChanged, handleSignOut, completed, setCompleted, handleCompleted} = UserAuth()
 
 
 
@@ -103,7 +98,7 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
 
       return () => clearTimeout(timer);
     }
-  }, [tasks, user, dataLoaded])
+  }, [user, dataLoaded, tasks])
 
   /*    useEffect(() => {
        if (user === null && dataLoaded) {

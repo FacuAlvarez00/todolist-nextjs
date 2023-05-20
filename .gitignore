@@ -46,4 +46,5 @@ Recuperar user a traves de alguna forma.
 -Cuando la cuenta esta recien creada, no se puede agregar tasks porque el array de tasks que empieza vacio
 no le da chance para usar el valor inicial porque lo pushea de una.
 -Fixear los colores de task status
+-Hacer que el redirect no me lleve a la pagina de login si ya estoy logueado y quiero ir a la pagina de login
 
