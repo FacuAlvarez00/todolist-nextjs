@@ -17,10 +17,10 @@ import { clearTasks } from '@/app/GlobalRedux/features/task/taskSlice';
 
 const Navbarzera = () => {
 
-  const user = useSelector((state: any) => state.user.user);
+
   const tasks = useSelector((state: any) => state.tasks);
   const dispatch = useDispatch();
-  const { userChanged, setUserChanged, handleSignOut, completed} = UserAuth()
+  const { userChanged, setUserChanged, handleSignOut, completed, user } = UserAuth()
 
 
 
@@ -31,48 +31,37 @@ const Navbarzera = () => {
       window.location.reload();
 
     }
- 
+
   }, [userChanged]);
 
   return (
-    <Navbar bg="light" expand="lg">
-    <Container>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
+    <nav className=' mb-4'>
+      <ul className='d-flex align-items-center fw-semibold'>
+        <Link href={"/"}> 
+          <li>Home</li>
+        </Link>
 
-          <Link href={"/"}>
-            <p>Home</p>
-          </Link>
+        {user ? (
+          <>
+            {/*    <p className="nav-link active">Signed as {user.displayName}</p> */}
 
-          {user? (
-     <>
-   {/*    <p className="nav-link active">Signed as {user.displayName}</p> */}
-   
-  {/*  <Link href="/Signin">
+            {/*  <Link href="/Signin">
           Account
     </Link> */}
-    <p onClick={handleSignOut}>LogOut</p>
-     </>
-    ):(
-      <>
-      <Link href="/Signin">
-          Login
-        </Link>
-      </>
-    )}
+            <li onClick={handleSignOut}>LogOut</li>
+          </>
+        ) : (
+          <>
+            <Link href="/Signin">
+              <li>Login</li>
+            </Link>
+          </>
+        )}
 
+      </ul>
 
+    </nav>
 
-        </Nav>
-
-       
-
-      </Navbar.Collapse>
-    </Container>
-  </Navbar>
-
-    
   )
 }
 

@@ -20,7 +20,7 @@ const TasksContainer = () => {
 
 
 
-    const user = useSelector((state: any) => state.user.user);
+    
     const [tasksFromLocalStorage, setTasksFromLocalStorage] = useState<any>()
     const [dataLoaded, setDataLoaded] = useState(false);
     const [edit, setEdit] = useState<boolean>(false);
@@ -35,9 +35,8 @@ const TasksContainer = () => {
     }
     );
 
-    const { userChanged } = UserAuth()
+    const { userChanged, user } = UserAuth()
 
-    console.log(userChanged)
 
 
     useEffect(() => {
@@ -169,7 +168,8 @@ const TasksContainer = () => {
     }, [user]);
 
  
-    
+    const maxNameWords = 2;
+    const trimmedName = user?.displayName ? user.displayName.split(' ').slice(0, maxNameWords).join(' ') : '';
  
 
 
@@ -178,7 +178,7 @@ const TasksContainer = () => {
         <section className='tasksContainer'>
             {dataLoaded ?
                 <div>
-                {user? <p>User logued</p> : <p>GUEST</p>}
+                {user? <p className='welcome-message d-flex justify-content-start'>Welcome,<br></br>{trimmedName}</p> : <p className='welcome-message d-flex justify-content-start'>GUEST</p>}
            
                   <TaskDetail tasks={tasks} tasksFromLocalStorage={tasksFromLocalStorage} displayedTask={displayedTask} handleDisplay={handleDisplay}
                   handleTaskEdit={handleTaskEdit} confirmationAlert={confirmationAlert}

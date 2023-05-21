@@ -22,10 +22,10 @@ import { UserAuth } from '@/app/context/AppContext';
 export default function SignIn() {
 
     const dispatch = useDispatch();
-    const user = useSelector((state: any) => state.user.user);
+   /*  const user = useSelector((state: any) => state.user.user); */
     const router = useRouter();
 
-    const { userChanged, setUserChanged, handleSignOut, completed } = UserAuth()
+    const { userChanged, setUserChanged, handleSignOut, completed, user, setUser } = UserAuth()
     
 
 
@@ -44,7 +44,9 @@ export default function SignIn() {
   
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (currentUser: any) => {
-        dispatch(setUser(currentUser));
+        /* dispatch(setUser(currentUser)); */
+        setUser(currentUser)
+
       });
   
       return () => {
@@ -60,9 +62,6 @@ export default function SignIn() {
    
     }, [userChanged]);
 
-   /*  useEffect(() => {
-      router.push('/');
-    }, [onAuthStateChanged]) */
 
     useEffect ( () => {
       if (user != null){
@@ -71,7 +70,7 @@ export default function SignIn() {
   }, [user])
 
 
-   
+   console.log(user)
     
   return (
     <div>

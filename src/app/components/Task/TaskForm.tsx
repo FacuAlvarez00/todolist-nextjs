@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { addTask } from '../../GlobalRedux/features/task/taskSlice';
-import { setUser } from '../../GlobalRedux/features/account/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder } from "../../firebase"
 import { onAuthStateChanged } from "firebase/auth";
@@ -25,8 +24,8 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
   setTasksFromLocalStorage, tasksFromLocalStorage }) => {
 
   const tasks = useSelector((state: any) => state.tasks);
-  const user = useSelector((state: any) => state.user.user);
-  const { userChanged, setUserChanged, handleSignOut, completed, setCompleted, handleCompleted} = UserAuth()
+  /* const user = useSelector((state: any) => state.user.user); */
+  const { userChanged, setUserChanged, handleSignOut, completed, setCompleted, handleCompleted, user, setUser} = UserAuth()
 
 
 
@@ -34,7 +33,7 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser: any) => {
-      dispatch(setUser(currentUser))
+      setUser(currentUser)
     })
     return () => {
       unsubscribe()

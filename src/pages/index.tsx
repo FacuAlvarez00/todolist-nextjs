@@ -8,7 +8,7 @@ import TasksContainer from "@/app/components/Task/TasksContainer";
 export default function Home() {
   return (
     <>
-    <h1 className="d-flex justify-content-center">Task manager</h1>
+    {/* <h1 className="d-flex justify-content-start header-title">Task manager</h1> */}
     <TasksContainer/>
 
    

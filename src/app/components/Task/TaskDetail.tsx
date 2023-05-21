@@ -21,15 +21,14 @@ type props = {
 
 const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handleTaskEdit, confirmationAlert, tasksFromLocalStorage}) => {
 
-    const user = useSelector((state: any) => state.user.user);
 
    
 
     return (
         <div>
-            <div className='tasks__holder border border-1 rounded border-bottom-0  border-light-subtle '>
+            <div className='tasks__holder'>
                 {tasks && Array.isArray(tasks) && tasks.map((task: any) => (
-                    <div className=' mb-1 border-bottom border-light-subtle task' key={task.id}>
+                    <div className='task' key={task.id}>
                   
                             <div className=''>
                                 <h4 className='fw-semibold task__title'>{task.title}</h4>

@@ -10,6 +10,8 @@ interface IAuthContext {
     completed: boolean;
     setCompleted: (value: boolean) => void;
     handleCompleted: () => void;
+    user: any;
+    setUser: (value: any) => void;
     
 }
 
@@ -23,6 +25,7 @@ interface IAuthContextProviderProps {
 export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => {
     const [userChanged, setUserChanged] = useState(false)
     const [completed, setCompleted] = useState<boolean>(false)
+    const [user, setUser] = useState<any>()
 
 
     const handleCompleted = () => {
@@ -40,7 +43,7 @@ export const AuthContextProvider = ({ children }: IAuthContextProviderProps) => 
 }
 
     return <AuthContext.Provider value={{ userChanged, setUserChanged, handleSignOut, completed,
-    setCompleted, handleCompleted }}>{children}</AuthContext.Provider>;
+    setCompleted, handleCompleted, user, setUser }}>{children}</AuthContext.Provider>;
 };
 
 export const UserAuth = () => {

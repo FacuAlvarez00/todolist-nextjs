@@ -11,7 +11,35 @@
     width: 100%;
     height: 60px;   
   }
-  
+  .header-title{
+    padding: 0 30px;
+  }
+  .welcome-message{
+    padding: 0 30px;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  a{
+    text-decoration: none !important;
+    color: black !important;
+  }
+  nav{
+   height: 50px;
+   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  }
+  nav ul li{
+    list-style: none;
+    text-decoration: none !important;
+    
+  }
+  nav ul{
+   
+    height: 100%;
+    gap: 30px;
+    font-size: 20px;
+    text-decoration: none !important;
+
+  }
   
   
   .button_account{
@@ -99,6 +127,14 @@
    }
   
    /* TaskDetail */
+   
+  
+  .task {
+    border-bottom: 1px solid lightgrey; 
+  }
+  .task:first-child {
+    border-top: 1px solid lightgrey; 
+  }
   
    .tasks__holder  {
 
@@ -106,9 +142,9 @@
     max-height: 420px; 
     overflow-y: auto;
   }
-  /* .task{
-    padding: 1.8rem;
-  } */
+  .task{
+    padding: 0.4rem 0;
+  } 
    .task__title{
     font-size: 24px;
   }
