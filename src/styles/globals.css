@@ -14,11 +14,7 @@
   .header-title{
     padding: 0 30px;
   }
-  .welcome-message{
-    padding: 0 30px;
-    font-size: 24px;
-    margin-bottom: 15px;
-  }
+
   a{
     text-decoration: none !important;
     color: black !important;
@@ -97,6 +93,18 @@
    .tasksContainer{
     width: 100%;
    }
+   .welcome-message{
+    display: flex;
+    justify-content: start;
+    padding: 0 30px;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+   @media only screen and (min-width: 1000px) {
+    .welcome-message{
+      display: none;
+    }
+   }
   
    /* TaskForm */
    .form__container__title{
@@ -125,31 +133,64 @@
     padding: 5px 10px !important;
     font-size: 14px !important;
    }
-  
+
+
+   @media only screen and (min-width: 1000px) {
+    .form__container{
+      padding: 0 5rem;
+     }
+     .form__container__title{
+      font-size: 30px;
+     }
+    .formField{
+      height: 60px;
+     }
+     .formField__text{
+      height: 100px;
+     }
+     ::placeholder{
+      text-align: start;
+     }
+     input{
+      text-align: start;
+     }
+     .btn-status{
+      width: 100%;
+      padding: 8px 0 !important;
+      font-size: 17px !important;
+     }
+     .btn-save{
+      padding: 5px 10px !important;
+      font-size: 17px !important;
+     }
+   }
+   @media only screen and (min-width: 1400px) {
+    .form__container{
+      padding: 0 20rem;
+     }
+  }
+    
    /* TaskDetail */
    
   
   .task {
     border-bottom: 1px solid lightgrey; 
+    padding: 0.4rem 0;
   }
   .task:first-child {
     border-top: 1px solid lightgrey; 
   }
-  
-   .tasks__holder  {
-
+  .tasks__holder  {
     padding: 0 30px;
     max-height: 420px; 
     overflow-y: auto;
   }
-  .task{
-    padding: 0.4rem 0;
-  } 
+
    .task__title{
     font-size: 24px;
   }
   .task__desc{
-    font-size: 16px;
+    font-size: 19px;
 
   }
   .display_arrow{
@@ -159,8 +200,33 @@
   .btn__task{
     font-size: 14px !important;
   }
+  @media only screen and (min-width: 1000px) {
+    .tasks__section{
+      display: flex;
+      justify-content: center;
+      padding: 0 4rem;
+    }
+    .tasks__holder  {
+      width: 100%;
+      margin-bottom: 20px;
+      max-height: 500px; 
+    }
+    .task{
+    padding: 0.1rem 0;
+  } 
+  .btn__task{
+    font-size: 17px !important;
+  }
+  }
+  @media only screen and (min-width: 1400px) {
+    .tasks__section{
+      display: flex;
+      justify-content: center;
+      padding: 0 18rem;
+    }
+  }
 
-  /* TaskDetail */
+  /* TaskEditing */
 
   .editForm_wrapper{
     padding: 0 30px;
@@ -178,24 +244,32 @@
   .input-edit-text{
     height: 80px !important;
   }
-  
+  @media only screen and (min-width: 1000px) {
+    .editForm_wrapper{
+      padding: 0 5rem;
+    }
+    .input-edit-title{
+      height: 60px !important;
+    }
+    .input-edit-text{
+      height: 100px !important;
+    }
+    .editForm_wrapper h2{
+      font-size: 30px;
+    }
+  }
+  @media only screen and (min-width: 1400px) {
+    .editForm_wrapper{
+      padding: 0 20rem;
+    }
+   
+  }
 
   
 
   
   
-   @media only screen and (min-width: 1000px) {
-    .formField{
-      width: 700px;
-      height: 80px;
-     }
-     .formField__text{
-      width: 100%;
-      height: 120px;
-     }
-    
-   }
-    
+  
    
 
 

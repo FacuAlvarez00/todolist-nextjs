@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
+    "@react-hook/window-size": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "18.15.13",
     "@types/react": "18.0.38",

@@ -25,7 +25,7 @@ const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handl
    
 
     return (
-        <div>
+        <div className='tasks__section'>
             <div className='tasks__holder'>
                 {tasks && Array.isArray(tasks) && tasks.map((task: any) => (
                     <div className='task' key={task.id}>

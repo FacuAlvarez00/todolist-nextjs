@@ -19,7 +19,7 @@ const TaskEdit: React.FC<props> = ({
         <>
             
 
-            <div className='editForm_wrapper'>
+            <div className='editForm_wrapper mt-2'>
                 <h2>Editing task...</h2>
                 <form onSubmit={handleSubmit}>
                     <div className='d-flex flex-column input-group input-group-lg'>

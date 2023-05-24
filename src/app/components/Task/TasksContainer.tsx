@@ -178,7 +178,7 @@ const TasksContainer = () => {
         <section className='tasksContainer'>
             {dataLoaded ?
                 <div>
-                {user? <p className='welcome-message d-flex justify-content-start'>Welcome,<br></br>{trimmedName}</p> : <p className='welcome-message d-flex justify-content-start'>GUEST</p>}
+                {user? <p className='welcome-message'>Welcome,<br></br>{trimmedName}</p> : <p className='welcome-message'>GUEST</p>}
            
                   <TaskDetail tasks={tasks} tasksFromLocalStorage={tasksFromLocalStorage} displayedTask={displayedTask} handleDisplay={handleDisplay}
                   handleTaskEdit={handleTaskEdit} confirmationAlert={confirmationAlert}
