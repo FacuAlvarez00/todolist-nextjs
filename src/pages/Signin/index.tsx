@@ -6,7 +6,6 @@ import {auth} from "../../app/firebase"
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../app/GlobalRedux/features/account/accountSlice';
 import GoogleButton from 'react-google-button'
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/router';

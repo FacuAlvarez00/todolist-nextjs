@@ -1,5 +1,5 @@
 'use client'
-import { useContext, createContext, ReactNode, useEffect, useState } from "react";
+import { useContext, createContext, ReactNode, useState } from "react";
 import { logOut } from "../../app/utils/account"
 
 

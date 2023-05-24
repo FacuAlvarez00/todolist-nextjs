@@ -1,12 +1,11 @@
 'use client';
 
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteTask, addTask, editTask, setTasks } from '../../GlobalRedux/features/task/taskSlice';
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri"
+import { deleteTask, editTask, setTasks } from '../../GlobalRedux/features/task/taskSlice';
 import TaskForm from './TaskForm';
 import { getOrderTask } from "../../firebase"
-import { taskDeleted, taskEdited, confirmationAlert } from '../../utils/sweetalert';
+import { taskDeleted, taskEdited } from '../../utils/sweetalert';
 import Swal from 'sweetalert2';
 import TaskDetail from './TaskDetail';
 import TaskEdit from './TaskEdit';

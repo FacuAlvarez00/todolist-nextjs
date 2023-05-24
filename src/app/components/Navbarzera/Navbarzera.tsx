@@ -2,15 +2,8 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { useSelector } from 'react-redux';
-import { logOut } from "../../utils/account"
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { UserAuth } from '@/app/context/AppContext';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useWindowSize } from '@react-hook/window-size';
 
 

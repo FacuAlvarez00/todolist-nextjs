@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri"
-import { useSelector } from 'react-redux'
+
 
 
 
@@ -19,7 +19,7 @@ type props = {
 
 
 
-const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handleTaskEdit, confirmationAlert, tasksFromLocalStorage}) => {
+const TaskDetail: React.FC<props> = ({tasks, displayedTask, handleDisplay, handleTaskEdit, confirmationAlert}) => {
 
 
    
