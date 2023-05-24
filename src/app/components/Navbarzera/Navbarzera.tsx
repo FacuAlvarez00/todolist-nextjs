@@ -14,18 +14,12 @@ import { useDispatch } from 'react-redux';
 import { useWindowSize } from '@react-hook/window-size';
 
 
-
-
-
 const Navbarzera = () => {
 
 
-  const dispatch = useDispatch();
-  const { userChanged, setUserChanged, handleSignOut, completed, user } = UserAuth()
+  const { userChanged, handleSignOut, completed, user } = UserAuth()
   const [mobile, setMobile] = useState<any>(false)
-  const [windowWidth, windowHeight] = useWindowSize();
-
-
+  const [windowWidth] = useWindowSize();
 
 
 
@@ -43,7 +37,6 @@ const Navbarzera = () => {
 
   useEffect(() => {
     if (completed) {
-      /* dispatch(clearTasks(tasks)) */
       window.location.reload();
     }
   }, [userChanged]);
