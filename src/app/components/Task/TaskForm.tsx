@@ -126,7 +126,7 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
            <span className='fs-5'>Completed:</span> 
             <input type="checkbox" checked={task.completed} onChange={handleCompletedChange} />
           </label> */}
-              <div className="btn-group btn-status" role="group" aria-label="Basic checkbox toggle button group">
+            {/*   <div className="btn-group btn-status" role="group" aria-label="Basic checkbox toggle button group">
 
                 <input type="checkbox" className="btn-check" id="btncheck1" name='completed' onChange={handleCompletedChange} />
 
@@ -135,7 +135,7 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
                   {completed ? "Completed" : "Uncompleted"}
                 </label>
 
-              </div>
+              </div> */}
             </div>
 
             {dataLoaded ?
