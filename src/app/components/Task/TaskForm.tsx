@@ -139,9 +139,9 @@ const TaskForm: React.FC<props> = ({ edit, dataLoaded,
             </div>
 
             {dataLoaded ?
-              <button className='btn btn-primary btn-save'>Save task</button>
+              <button className='btn btn-success btn-save'>Save task</button>
               :
-              <button className='btn btn-primary disabled btn-save'>Save task</button>
+              <button className='btn btn-success disabled btn-save'>Save task</button>
             }
 
 
